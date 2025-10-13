@@ -40,8 +40,7 @@ app.use(
   session({
     store: new pgSession({
       pool: pgPool, // Connection pool
-      tableName: 'session', // Use another table-name than the default "session" one
-      // Insert connect-pg-simple optcions here
+      createTableIfMissing: true,
     }),
     secret: process.env.SECRET || 'brain cats',
     resave: false,
@@ -58,37 +57,25 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use((req, res, next) => {
-//   console.log(req.session);
-//   console.log(req.user);
-//   next();
-// });
+app.use((req, res, next) => {
+  console.log(req.session);
+  console.log(req.user);
+  next();
+});
 
 /**
  * -------------- ROUTERS ----------------
  */
 const indexRouter = require('./routes/indexRouter');
+const userRouter = require('./routes/userRouter');
+const loginRouter = require('./routes/loginRouter');
 
 /**
  * -------------- ROUTES ----------------
  */
+app.use('/user', userRouter);
+app.use('/login', loginRouter);
 app.use('/', indexRouter);
-
-// TODO
-
-/**
- * -------------- SERVER ----------------
- */
-
-// // routers
-// const indexRouter = require('./routes/indRouter');
-// const newRouter = require('./routes/newRouter');
-// const categoryRouter = require('./routes/categoryRouter');
-
-// // Routers
-// app.use('/new', newRouter);
-// app.use('/categories', categoryRouter);
-// app.use('/', indexRouter);
 
 // Errorhandling router
 app.use((err, req, res, next) => {
@@ -107,5 +94,5 @@ app.listen(PORT, (error) => {
   if (error) {
     throw error;
   }
-  console.log(`Node-Inventory app - listening on port ${PORT}!`);
+  console.log(`Members Only app - listening on port ${PORT}!`);
 });

@@ -4,8 +4,9 @@ const db = require('../db/postsQueries');
 
 async function getAllPostsControl(req, res) {
   const posts = await db.getAllPosts();
-  console.log(posts);
-  res.render('index');
+  res.render('index', {
+    posts: posts,
+  });
 }
 
 module.exports = { getAllPostsControl };

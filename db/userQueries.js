@@ -14,18 +14,20 @@ async function createUser(first_name, last_name, email, password, isadmin) {
 
 async function findUserByEmail(email) {
   const { rows } = await pool.query('SELECT * FROM users WHERE email = $1', [
-    username,
+    email,
   ]);
   return rows[0];
 }
 
 async function findUserById(id) {
-  const { rows } = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
+  const { rows } = await pool.query('SELECT * FROM users WHERE user_id = $1', [
+    id,
+  ]);
   return rows[0];
 }
 
 async function validatePassword(user, password) {
-  return bcrypt.compare(password, user.password);
+  return bcrypt.compare(password, user.hashed_pwd);
 }
 
 module.exports = {

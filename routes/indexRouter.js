@@ -5,7 +5,7 @@ const { getAllPostsControl } = require('../controllers/postsController');
 
 const indexRouter = new Router();
 
-// basic route to start
+// routes and controllers
 indexRouter.get('/', getAllPostsControl);
 
 module.exports = indexRouter;

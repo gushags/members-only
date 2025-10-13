@@ -8,6 +8,17 @@
     <title>Document</title>
   </head>
   <body>
-    This is the index page.
+    <h1>Posts</h1>
+    <% posts ? posts.map(post => { %>
+    <ul>
+      <li><%= post.title %></li>
+      <li><%= post.message %></li>
+      <li>
+        Username: <%= post.email %> (<%= post.first_name %> <%= post.last_name
+        %>)
+      </li>
+      <li>Created: <%= post.date_created %></li>
+    </ul>
+    <%}) : 'Nothing to see here.' %>
   </body>
 </html>
