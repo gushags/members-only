@@ -3,17 +3,17 @@
 const pool = require('./pool');
 const bcrypt = require('bcrypt');
 
-async function createUser(username, email, password) {
+async function createUser(first_name, last_name, email, password, isadmin) {
   const hashedPassword = await bcrypt.hash(password, 10);
   const { rows } = await pool.query(
-    'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *',
-    [username, email, hashedPassword]
+    'INSERT INTO users (first_name, last_name, email, hashed_pwd, isadmin) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+    [first_name, last_name, email, hashedPassword, isadmin]
   );
   return rows[0];
 }
 
-async function findUserByUsername(username) {
-  const { rows } = await pool.query('SELECT * FROM users WHERE username = $1', [
+async function findUserByEmail(email) {
+  const { rows } = await pool.query('SELECT * FROM users WHERE email = $1', [
     username,
   ]);
   return rows[0];
@@ -30,7 +30,7 @@ async function validatePassword(user, password) {
 
 module.exports = {
   createUser,
-  findUserByUsername,
+  findUserByEmail,
   findUserById,
   validatePassword,
 };
