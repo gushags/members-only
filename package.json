@@ -1,0 +1,31 @@
+{
+  "name": "members-only",
+  "version": "1.0.0",
+  "description": "Members Only student project for Odin",
+  "homepage": "https://github.com/gushags/members-only#readme",
+  "bugs": {
+    "url": "https://github.com/gushags/members-only/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gushags/members-only.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "connect-pg-simple": "^10.0.0",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^4.17.1",
+    "express-session": "^1.18.2",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "pg": "^8.16.3"
+  },
+  "author": "",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
