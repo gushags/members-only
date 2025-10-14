@@ -14,10 +14,12 @@
     <ul>
       <li><%= post.title %></li>
       <li><%= post.message %></li>
+      <% if (user) { %>
       <li>
         Username: <%= post.email %> (<%= post.first_name %> <%= post.last_name
         %>)
       </li>
+      <% } %>
       <li>Created: <%= post.date_created %></li>
     </ul>
     <%}) : 'Nothing to see here.' %>

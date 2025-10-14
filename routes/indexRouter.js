@@ -3,6 +3,7 @@
 const { Router } = require('express');
 const { getAllPostsControl } = require('../controllers/postsController');
 const { createNewUserControl } = require('../controllers/userController');
+const { validateNewUser } = require('../validators/userValidators');
 
 const indexRouter = new Router();
 
@@ -13,9 +14,9 @@ indexRouter.get('/logout', (req, res) => {
   res.redirect('/');
 });
 indexRouter.get('/signup', (req, res) => {
-  res.render('signup');
+  res.render('signup', { data: null });
 });
 
-indexRouter.post('/signup', createNewUserControl);
+indexRouter.post('/signup', validateNewUser, createNewUserControl);
 
 module.exports = indexRouter;

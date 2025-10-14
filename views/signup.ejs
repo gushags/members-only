@@ -8,26 +8,37 @@
     <title>Document</title>
   </head>
   <body>
+    <%- include("partials/errors.ejs") %>
     <h1>Become a member today.</h1>
     <form method="POST" action="/signup">
       <label for="email">Email (this is your username)</label>
-      <input type="email" name="email" id="email" required />
+      <input
+        type="email"
+        name="email"
+        id="email"
+        value="<%= data ? data.email : '' %>"
+        required
+      />
       <label for="firstname">First name</label>
-      <input type="text" name="firstname" id="firstname" required />
+      <input
+        type="text"
+        name="firstname"
+        id="firstname"
+        value="<%= data ? data.firstname : '' %>"
+        required
+      />
       <label for="lastname">Last name</label>
-      <input type="text" name="lastname" id="lastname" required />
+      <input
+        type="text"
+        name="lastname"
+        id="lastname"
+        value="<%= data ? data.lastname : '' %>"
+        required
+      />
       <div>
-        <label for="isadmin">Admin?</label>
-        <label for="admin-true">Yes</label>
-        <input type="radio" name="isadmin" id="admin-true" value="true" />
-        <label for="admin-false">No</label>
-        <input
-          type="radio"
-          name="isadmin"
-          id="admin-false"
-          value="false"
-          checked
-        />
+        <label for="isadmin">Admin User</label>
+        <input type="checkbox" name="isadmin" value="true" <%= data &&
+        data.isadmin ? 'checked' : '' %> />
       </div>
       <label for="password">Password</label>
       <input type="password" name="password" id="password" required />
