@@ -1,0 +1,39 @@
+<!-- views/signup.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Become a member today.</h1>
+    <form method="POST" action="/signup">
+      <label for="email">Email (this is your username)</label>
+      <input type="email" name="email" id="email" required />
+      <label for="firstname">First name</label>
+      <input type="text" name="firstname" id="firstname" required />
+      <label for="lastname">Last name</label>
+      <input type="text" name="lastname" id="lastname" required />
+      <div>
+        <label for="isadmin">Admin?</label>
+        <label for="admin-true">Yes</label>
+        <input type="radio" name="isadmin" id="admin-true" value="true" />
+        <label for="admin-false">No</label>
+        <input
+          type="radio"
+          name="isadmin"
+          id="admin-false"
+          value="false"
+          checked
+        />
+      </div>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" required />
+      <label for="password-confirm">Confirm password</label>
+      <input type="password" name="password-confirm" id="password-confirm" />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

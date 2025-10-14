@@ -23,15 +23,7 @@ ALTER SEQUENCE users_user_id_seq RESTART WITH 101;
 `;
 
 const SQL = `
-DROP TABLE IF EXISTS session;
 DROP TABLE IF EXISTS posts;
-
-CREATE TABLE session (
-    sid VARCHAR NOT NULL COLLATE "default",
-    sess JSON NOT NULL,
-    expire TIMESTAMP(6) NOT NULL
-    )
-WITH (OIDS=FALSE);
 
 CREATE TABLE posts (
     post_id SERIAL PRIMARY KEY,
@@ -68,19 +60,13 @@ async function main() {
 
   await client.connect();
   await client.query(USERS_SQL);
-  await client.end();
   await createUser('Jeff', 'Hubert', 'jeff@example.com', 'irish', true);
   await createUser('Amber', 'Wheels', 'amber@mac.com', 'irish', false);
   await createUser('Nora', 'Hagkull', 'nora@ucsd.edu', 'irish', false);
   console.log('done seeding users');
   console.log('seeding...');
-  const client2 = new Client({
-    connectionString: PGPOSTGRESQLURL, // Local is: 'postgresql://jeff@localhost:5432/members'
-  });
-
-  await client2.connect();
-  await client2.query(SQL);
-  await client2.end();
+  await client.query(SQL);
+  await client.end();
   console.log('done');
 }
 

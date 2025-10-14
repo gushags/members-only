@@ -1,0 +1,6 @@
+<nav>
+  <% if (user) { %>
+  <p><%= user.first_name %> is logged in.</p>
+  <a href="/logout">Logout</a>
+  <% }%>
+</nav>
