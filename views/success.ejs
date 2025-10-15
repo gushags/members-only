@@ -8,6 +8,7 @@
     <title>Document</title>
   </head>
   <body>
+    <%- include("partials/flashErrors.ejs") %>
     <h1>You have successfully logged in.</h1>
     <% if (user.ismember) { %>
     <p>
@@ -20,6 +21,7 @@
       posts with author data and creation dates. It's a club!
     </p>
     <form method="POST" action="/member">
+      <input type="number" name="userid" value="<%= user.user_id %>" hidden />
       <label for="memberpwd">Enter member password</label>
       <input type="password" name="memberpwd" id="memberpwd" required />
       <button type="submit">Submit</button>

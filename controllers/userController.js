@@ -27,4 +27,24 @@ async function createNewUserControl(req, res, next) {
   }
 }
 
-module.exports = { findUserByEmailControl, createNewUserControl };
+async function createNewMemberControl(req, res, next) {
+  const { userid, memberpwd } = req.body;
+  try {
+    if (memberpwd === 'IrishChamps2025') {
+      await db.updateUserToMember(userid);
+      res.redirect('/member');
+    } else {
+      req.flash('errormsg', 'That password is incorrect. Try again.');
+      res.redirect('/login/success');
+    }
+  } catch (err) {
+    console.error(err);
+    next(err); // let Express handle error
+  }
+}
+
+module.exports = {
+  findUserByEmailControl,
+  createNewUserControl,
+  createNewMemberControl,
+};

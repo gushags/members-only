@@ -2,7 +2,10 @@
 
 const { Router } = require('express');
 const { getAllPostsControl } = require('../controllers/postsController');
-const { createNewUserControl } = require('../controllers/userController');
+const {
+  createNewUserControl,
+  createNewMemberControl,
+} = require('../controllers/userController');
 const { validateNewUser } = require('../validators/userValidators');
 
 const indexRouter = new Router();
@@ -17,6 +20,11 @@ indexRouter.get('/signup', (req, res) => {
   res.render('signup', { data: null });
 });
 
+indexRouter.get('/member', (req, res) => {
+  res.render('member');
+});
+
 indexRouter.post('/signup', validateNewUser, createNewUserControl);
+indexRouter.post('/member', createNewMemberControl);
 
 module.exports = indexRouter;

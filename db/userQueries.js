@@ -30,9 +30,14 @@ async function validatePassword(user, password) {
   return bcrypt.compare(password, user.hashed_pwd);
 }
 
+async function updateUserToMember(id) {
+  await pool.query('UPDATE users SET ismember = TRUE WHERE user_id = $1', [id]);
+}
+
 module.exports = {
   createUser,
   findUserByEmail,
   findUserById,
   validatePassword,
+  updateUserToMember,
 };
