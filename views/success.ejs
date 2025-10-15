@@ -9,6 +9,25 @@
   </head>
   <body>
     <h1>You have successfully logged in.</h1>
-    <p>You may now <a href="/">view all posts</a>.</p>
+    <% if (user.ismember) { %>
+    <p>
+      You may now <a href="/">view all posts</a> with author data and dates
+      created..
+    </p>
+    <% } else { %>
+    <p>
+      But you still need to enter the member password if you want to view all
+      posts with author data and creation dates. It's a club!
+    </p>
+    <form method="POST" action="/member">
+      <label for="memberpwd">Enter member password</label>
+      <input type="password" name="memberpwd" id="memberpwd" required />
+      <button type="submit">Submit</button>
+    </form>
+    <h4>
+      I don't know the password. :-( <a href="/">Show me the posts</a> without
+      the bits and bobs.
+    </h4>
+    <% } %>
   </body>
 </html>

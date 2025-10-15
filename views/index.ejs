@@ -10,17 +10,17 @@
   <body>
     <%- include ('partials/loginStatus.ejs') %>
     <h1>Posts</h1>
-    <% posts ? posts.map(post => { %>
+    <% posts ? posts.forEach(post => { %>
     <ul>
       <li><%= post.title %></li>
       <li><%= post.message %></li>
-      <% if (user) { %>
+      <% if (user && user.ismember) { %>
       <li>
         Username: <%= post.email %> (<%= post.first_name %> <%= post.last_name
         %>)
       </li>
-      <% } %>
       <li>Created: <%= post.date_created %></li>
+      <% } %>
     </ul>
     <%}) : 'Nothing to see here.' %>
   </body>

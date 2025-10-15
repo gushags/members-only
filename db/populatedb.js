@@ -16,7 +16,8 @@ CREATE TABLE users (
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
     hashed_pwd VARCHAR(255) NOT NULL,
-    isadmin BOOLEAN DEFAULT FALSE
+    isadmin BOOLEAN DEFAULT FALSE,
+    ismember BOOLEAN DEFAULT FALSE
 );
 ALTER SEQUENCE users_user_id_seq RESTART WITH 101;
 
@@ -24,7 +25,7 @@ ALTER SEQUENCE users_user_id_seq RESTART WITH 101;
 
 const SQL = `
 DROP TABLE IF EXISTS posts;
-
+DROP TABLE IF EXISTS session;
 CREATE TABLE posts (
     post_id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,

@@ -5,6 +5,7 @@ const path = require('node:path');
 const session = require('express-session');
 const passport = require('passport');
 const pgPool = require('./db/pool');
+const flash = require('express-flash');
 
 // Gives us access to variables set in the .env file via `process.env.VARIABLE_NAME` syntax
 require('dotenv').config();
@@ -57,10 +58,17 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+/**
+ * -------------- FLASH SETUP -----------------
+ */
+
+app.use(flash());
+
 app.use((req, res, next) => {
   console.log(req.session);
   console.log(req.user);
   res.locals.user = req.user;
+  res.locals.errormsg = req.flash('error');
   next();
 });
 

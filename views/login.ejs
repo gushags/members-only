@@ -8,6 +8,9 @@
     <title>Document</title>
   </head>
   <body>
+    <% if (errormsg) { %>
+    <h3><%= errormsg %></h3>
+    <% } %>
     <h1>Login Page</h1>
     <form method="POST" action="/login">
       <label for="username">Enter email:</label
