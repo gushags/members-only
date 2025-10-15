@@ -1,7 +1,10 @@
 // routes/indexRouter.js
 
 const { Router } = require('express');
-const { getAllPostsControl } = require('../controllers/postsController');
+const {
+  getAllPostsControl,
+  createNewPostControl,
+} = require('../controllers/postsController');
 const {
   createNewUserControl,
   createNewMemberControl,
@@ -26,5 +29,6 @@ indexRouter.get('/member', (req, res) => {
 
 indexRouter.post('/signup', validateNewUser, createNewUserControl);
 indexRouter.post('/member', createNewMemberControl);
+indexRouter.post('/newpost', createNewPostControl);
 
 module.exports = indexRouter;

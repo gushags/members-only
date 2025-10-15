@@ -17,4 +17,23 @@ async function getAllPosts() {
   return rows;
 }
 
-module.exports = { getAllPosts };
+async function createNewPost(title, message, userid) {
+  const result = await pool.query(
+    `
+    INSERT INTO posts (title, message)
+    VALUES ($1, $2)
+    RETURNING post_id
+    `,
+    [title, message]
+  );
+  const postid = result.rows[0].post_id;
+  await pool.query(
+    `
+    INSERT INTO users_posts (user_id, post_id)
+    VALUES ($1, $2)
+    `,
+    [userid, postid]
+  );
+}
+
+module.exports = { getAllPosts, createNewPost };
