@@ -5,7 +5,14 @@ const pool = require('./pool');
 async function getAllPosts() {
   const { rows } = await pool.query(
     `
-    SELECT u.email, u.first_name, u.last_name, p.title, p.message, p.date_created
+    SELECT u.user_id,
+           u.email,
+           u.first_name,
+           u.last_name,
+           p.title,
+           p.message,
+           p.date_created,
+           p.post_id
     FROM users_posts AS up
     JOIN users AS u
       ON u.user_id = up.user_id
@@ -36,4 +43,19 @@ async function createNewPost(title, message, userid) {
   );
 }
 
-module.exports = { getAllPosts, createNewPost };
+async function deletePost(id) {
+  await pool.query(
+    `
+    DELETE FROM users_posts WHERE post_id = $1
+    `,
+    [id]
+  );
+  await pool.query(
+    `
+    DELETE FROM posts WHERE post_id = $1
+    `,
+    [id]
+  );
+}
+
+module.exports = { getAllPosts, createNewPost, deletePost };

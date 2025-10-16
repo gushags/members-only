@@ -6,6 +6,7 @@ const session = require('express-session');
 const passport = require('passport');
 const pgPool = require('./db/pool');
 const flash = require('express-flash');
+const methodOverride = require('method-override');
 
 // Gives us access to variables set in the .env file via `process.env.VARIABLE_NAME` syntax
 require('dotenv').config();
@@ -21,6 +22,9 @@ const app = express();
 
 // Allow data to be read from req.body
 app.use(express.urlencoded({ extended: true }));
+
+// method override middleware
+app.use(methodOverride('_method'));
 
 // Get application ready to use ejs templates
 // from 'views' folder

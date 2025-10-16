@@ -23,9 +23,12 @@
       </li>
       <li>Created: <%= post.date_created %></li>
       <% } %> <% if (user && user.isadmin) { %>
-      <button class="deleteBtn" data-postid="<%= post.post_id %>">
-        Delete
-      </button>
+      <form
+        method="POST"
+        action="/delete/post/<%= post.post_id %>?_method=DELETE"
+      >
+        <button class="link-button danger" type="submit">Delete Post</button>
+      </form>
       <% } %>
     </ul>
     <%}) : 'Nothing to see here.' %> <% if (user && user.ismember) { %>

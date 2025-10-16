@@ -21,4 +21,16 @@ async function createNewPostControl(req, res) {
   }
 }
 
-module.exports = { getAllPostsControl, createNewPostControl };
+async function deletePostControl(req, res) {
+  const { id } = req.params;
+
+  console.log('Post ID', id);
+  await db.deletePost(id);
+  res.redirect('/');
+}
+
+module.exports = {
+  getAllPostsControl,
+  createNewPostControl,
+  deletePostControl,
+};
