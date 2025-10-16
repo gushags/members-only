@@ -1,7 +1,7 @@
 // validators/userValidators.js
 
 const { body } = require('express-validator');
-const db = require('../db/userQueries');
+const User = require('../db/User');
 
 const validateNewUser = [
   body('firstname')
@@ -20,7 +20,7 @@ const validateNewUser = [
     .isEmail()
     .withMessage('Valid email required')
     .custom(async (value) => {
-      const user = await db.findUserByEmail(value);
+      const user = await User.findByEmail(value);
       if (user) {
         throw new Error('E-mail already in use');
       }

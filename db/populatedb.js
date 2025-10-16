@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const { Client } = require('pg');
 const { PGPOSTGRESQLURL } = process.env;
-const { createUser } = require('./userQueries');
+const { createUser } = require('./User');
 
 const USERS_SQL = `
 DROP TABLE IF EXISTS users_posts;

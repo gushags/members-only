@@ -1,6 +1,6 @@
 // controllers/userController.js
 
-const db = require('../db/userQueries');
+const User = require('../db/User');
 const { validationResult } = require('express-validator');
 
 async function findUserByEmailControl(req, res) {
@@ -19,7 +19,7 @@ async function createNewUserControl(req, res, next) {
         data: req.body,
       });
     }
-    await db.createUser(firstname, lastname, email, password, isadmin);
+    await User.create(firstname, lastname, email, password, isadmin);
     res.redirect('/login');
   } catch (err) {
     console.error(err);
@@ -31,7 +31,7 @@ async function createNewMemberControl(req, res, next) {
   const { userid, memberpwd } = req.body;
   try {
     if (memberpwd === 'BlueDonkey') {
-      await db.updateUserToMember(userid);
+      await User.updateToMember(userid);
       res.redirect('/member');
     } else {
       req.flash('errormsg', 'That password is incorrect. Try again.');
