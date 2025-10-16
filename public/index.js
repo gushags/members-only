@@ -14,3 +14,17 @@ postOpenDialog.addEventListener('click', () => {
 postCloseBtn.addEventListener('click', () => {
   postDialog.close();
 });
+
+// Delete buttons
+const deleteForm = document.querySelectorAll('.deleteBtn');
+deleteForm.forEach((form) => {
+  form.addEventListener('click', (e) => {
+    e.preventDefault();
+    const userConfirm = confirm(
+      `Are you sure you want to delete this post? \nThis cannot be undone.`
+    );
+    if (userConfirm) {
+      form.submit();
+    }
+  });
+});

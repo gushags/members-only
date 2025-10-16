@@ -24,6 +24,7 @@
       <li>Created: <%= post.date_created %></li>
       <% } %> <% if (user && user.isadmin) { %>
       <form
+        class="deleteBtn"
         method="POST"
         action="/delete/post/<%= post.post_id %>?_method=DELETE"
       >
