@@ -30,7 +30,7 @@ async function createNewUserControl(req, res, next) {
 async function createNewMemberControl(req, res, next) {
   const { userid, memberpwd } = req.body;
   try {
-    if (memberpwd === 'IrishChamps2025') {
+    if (memberpwd === 'BlueDonkey') {
       await db.updateUserToMember(userid);
       res.redirect('/member');
     } else {
