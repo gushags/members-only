@@ -10,7 +10,7 @@
   <body>
     <%- include ('partials/loginStatus.ejs') %>
     <h1>Member's Only Posts</h1>
-    <% if (user && user.ismember) { %>
+    <% if (user) { %>
     <button id="post-open-modal">Create a new post</button>
     <% } %> <% posts ? posts.forEach(post => { %>
     <ul>
@@ -22,6 +22,10 @@
         %>)
       </li>
       <li>Created: <%= post.date_created %></li>
+      <% } %> <% if (user && user.isadmin) { %>
+      <button class="deleteBtn" data-postid="<%= post.post_id %>">
+        Delete
+      </button>
       <% } %>
     </ul>
     <%}) : 'Nothing to see here.' %> <% if (user && user.ismember) { %>

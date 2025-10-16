@@ -11,7 +11,7 @@ async function getAllPosts() {
       ON u.user_id = up.user_id
     JOIN posts AS p
       ON p.post_id = up.post_id
-    ORDER BY p.date_created
+    ORDER BY p.date_created DESC
     `
   );
   return rows;
